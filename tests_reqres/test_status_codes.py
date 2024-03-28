@@ -8,27 +8,10 @@ def test_get_user():
     assert response.status_code == 200
 
 
-def test_create_user():
-    name = 'Jhon'
-    job = 'Teacher'
-    payload = {
-        "name": name,
-        "job": job
-    }
-    response = requests.post(url=USER_URL, json=payload)
-
-    assert response.status_code == 201
-
-
-def test_delete_user():
-    response = requests.delete(USER_URL + '/2')
-
-    assert response.status_code == 204
-
-
 def test_not_found_user():
     response = requests.get(USER_URL + '/23')
 
+    assert response.json() == {}
     assert response.status_code == 404
 
 

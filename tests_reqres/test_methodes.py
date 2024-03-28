@@ -18,6 +18,8 @@ def test_create_user():
     response = requests.post(url=USER_URL, json=payload)
 
     assert response.json()['job'] == job
+    assert response.json()['name'] == name
+    assert response.status_code == 201
 
 
 def test_update_user():
@@ -30,9 +32,11 @@ def test_update_user():
     response = requests.put(url=USER_URL + '/2', json=payload)
 
     assert response.json()['name'] == name
+    assert response.json()['job'] == job
 
 
 def test_delete_user():
     response = requests.delete(url=USER_URL + '/2')
 
+    assert response.text == ''
     assert response.status_code == 204
